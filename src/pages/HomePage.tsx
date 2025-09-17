@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { fetchProducts } from '../services/api';
 import { recommendationEngine } from '../services/recommendations';
 import { Header } from '../components/Header';
 import { RecommendationBanner } from '../components/RecommendationBanner';
 import { ProductGrid } from '../components/ProductGrid';
-import { ProductDetail } from '../components/ProductDetail';
 import { Product } from '../types/product';
 import { useToast } from '../hooks/use-toast';
 
-const Index = () => {
+const HomePage = () => {
   const { 
     products, 
     setProducts, 
     setLoading, 
     interactions,
-    setSelectedProduct,
-    selectedProduct 
+    setSelectedProduct 
   } = useStore();
   
-  const [viewingProduct, setViewingProduct] = useState<Product | null>(null);
+  const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -65,12 +64,7 @@ const Index = () => {
 
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
-    setViewingProduct(product);
-  };
-
-  const handleBackToGrid = () => {
-    setViewingProduct(null);
-    setSelectedProduct(null);
+    navigate(`/product/${product.id}`);
   };
 
   return (
@@ -78,17 +72,8 @@ const Index = () => {
       <Header />
       
       <main className="container mx-auto px-4 py-8">
-        {viewingProduct ? (
-          <ProductDetail 
-            product={viewingProduct} 
-            onBack={handleBackToGrid} 
-          />
-        ) : (
-          <>
-            <RecommendationBanner />
-            <ProductGrid onProductClick={handleProductClick} />
-          </>
-        )}
+        <RecommendationBanner />
+        <ProductGrid onProductClick={handleProductClick} />
       </main>
       
       {/* Footer */}
@@ -103,4 +88,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default HomePage;
