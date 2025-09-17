@@ -18,6 +18,7 @@ interface StoreState {
   getOrderedProducts: () => Product[];
 }
 
+// Criação do store com persistência, implementação para Demo
 export const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
