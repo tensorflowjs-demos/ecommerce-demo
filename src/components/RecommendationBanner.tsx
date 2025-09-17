@@ -2,10 +2,9 @@ import { useStore } from '../store/useStore';
 import { Brain, TrendingUp } from 'lucide-react';
 
 export const RecommendationBanner = () => {
-  const { interactions, recommendationScores } = useStore();
+  const { interactions } = useStore();
   
   const hasInteractions = interactions.length > 0;
-  const hasRecommendations = recommendationScores.length > 0;
 
   if (!hasInteractions) {
     return (
@@ -34,11 +33,6 @@ export const RecommendationBanner = () => {
       <p className="text-muted-foreground">
         Based on your {interactions.length} interaction{interactions.length !== 1 ? 's' : ''}, 
         we've reordered products to match your preferences.
-        {hasRecommendations && (
-          <span className="block mt-1 text-sm">
-            Top recommendation: {recommendationScores[0]?.reasons[0]}
-          </span>
-        )}
       </p>
     </div>
   );
