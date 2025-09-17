@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,14 +9,24 @@ import HomePage from "./pages/HomePage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import NotFound from "./pages/NotFound";
 import * as tf from '@tensorflow/tfjs';
+import * as toxicity from '@tensorflow-models/toxicity';
 
 const queryClient = new QueryClient();
 
+// Global toxicity model instance
+export let toxicityModel: toxicity.ToxicityClassifier | null = null;
+
 const App = () => {
   useEffect(() => {
-    // Initialize TensorFlow.js backend
-    tf.ready().then(() => {
-      console.log('TensorFlow.js is ready!');
+    // Initialize TensorFlow.js backend and load models
+    tf.ready().then(async () => {
+      
+      // Load toxicity model once for the entire app
+      try {
+        toxicityModel = await toxicity.load(0.7, []);
+      } catch (error) {
+        console.error('❌ Failed to load toxicity model:', error);
+      }
     });
   }, []);
 

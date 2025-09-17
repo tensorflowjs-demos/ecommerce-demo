@@ -21,5 +21,12 @@ export interface UserInteraction {
 export interface RecommendationScore {
   productId: number;
   score: number;
-  reasons: string[];
+}
+
+export interface Comment {
+  id: string;
+  text: string;
+  author: string;
+  timestamp: Date;
+  isFlagged?: boolean;
 }

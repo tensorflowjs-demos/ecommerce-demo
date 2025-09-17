@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { ProductDetail } from '../components/ProductDetail';
+import { CommentSection } from '../components/CommentSection';
 import { useGetProduct } from '../hooks/useGetProduct';
 
 const ProductDetailPage = () => {
@@ -41,10 +42,13 @@ const ProductDetailPage = () => {
   }
 
   return (
-    <ProductDetail 
-      product={product} 
-      onBack={handleBackToGrid} 
-    />
+    <>
+      <ProductDetail 
+        product={product} 
+        onBack={handleBackToGrid} 
+      />
+      <CommentSection productId={productId} />
+    </>
   );
 };
 
