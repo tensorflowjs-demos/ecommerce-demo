@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Product } from '../types/product';
 import { useStore } from '../store/useStore';
 import { Button } from './ui/button';
@@ -28,7 +28,7 @@ export const ProductDetail = ({ product, onBack }: ProductDetailProps) => {
   };
 
   // Track view when component mounts
-  React.useEffect(() => {
+  useEffect(() => {
     handleViewStart();
     
     const startTime = Date.now();

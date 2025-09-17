@@ -1,190 +1,246 @@
-# 🛍️ AI Shop - TensorFlow.js Ecommerce Demo
+# 🛍️ SmartShop - Demo Educativo de E-commerce com TensorFlow.js
 
-A lightweight, intelligent ecommerce demo that uses **TensorFlow.js** to provide real-time, personalized product recommendations. Built with React and Vite for optimal performance.
+Uma demonstração educativa de e-commerce inteligente que utiliza **TensorFlow.js** para fornecer recomendações personalizadas em tempo real. Construído com React, TypeScript e Vite para performance otimizada.
 
-![AI Shop Demo](https://via.placeholder.com/800x400/667eea/FFFFFF?text=AI+Shop+Demo)
+![SmartShop Demo](https://via.placeholder.com/800x400/667eea/FFFFFF?text=SmartShop+Demo)
 
-## ✨ Features
+## 🎯 Objetivo Educativo
 
-### 🧠 Machine Learning Powered
-- **Real-time Recommendations**: TensorFlow.js neural network learns from user interactions
-- **Dynamic Product Reordering**: Homepage products automatically reorder based on your preferences
-- **Intelligent Similarity**: Products are recommended based on category, features, and user behavior
-- **Persistent Learning**: Model weights are saved locally and improve over time
+Este projeto é uma **demonstração educativa** focada em ensinar conceitos de Machine Learning no navegador usando TensorFlow.js. Ideal para estudantes e desenvolvedores que querem entender como implementar IA em aplicações web modernas.
 
-### 🎨 Modern UI/UX
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **Smooth Animations**: Elegant transitions and loading states
-- **Product Detail Modals**: Rich product information with related product suggestions
-- **User Statistics**: Track your interaction patterns and preferences
+## ✨ Funcionalidades
 
-### ⚡ Performance Optimized
-- **Lightweight Bundle**: < 2MB total application size
-- **Fast Loading**: Vite-powered development and optimized production builds
-- **Efficient ML Inference**: < 100ms recommendation processing
-- **Smart Caching**: Product data and model weights cached for better performance
+### 🧠 Inteligência Artificial Integrada
+- **Rede Neural Feedforward**: Implementa uma rede neural personalizada para aprendizado de padrões
+- **Aprendizado Online**: Modelo atualiza em tempo real com cada interação do usuário
+- **Sistema de Recomendações**: Combina filtragem baseada em conteúdo e colaborativa
+- **Detecção de Toxicidade**: Moderação automática de comentários usando modelo pré-treinado
+- **Persistência Local**: Pesos do modelo salvos no localStorage do navegador
 
-## 🚀 Quick Start
+### 🎨 Interface Moderna
+- **Design Responsivo**: Funciona perfeitamente em desktop e dispositivos móveis
+- **React Router**: Navegação entre páginas com URLs amigáveis
+- **Animações Suaves**: Transições elegantes e estados de carregamento
+- **Comentários Interativos**: Sistema de comentários com moderação por IA
+- **Feedback Visual**: Indicadores de carregamento e status dos modelos ML
 
-### Prerequisites
-- Node.js 18+ (compatible with Node.js 20.9.0)
-- npm or yarn
+### ⚡ Performance e Arquitetura
+- **React Query**: Gerenciamento inteligente de cache e estado do servidor
+- **Zustand**: Store global simples e eficiente para estado da aplicação
+- **TensorFlow.js**: Execução de modelos ML diretamente no navegador
+- **Vite**: Build system moderno para desenvolvimento rápido
+- **TypeScript**: Tipagem estática para maior confiabilidade
+- **Cache Inteligente**: Dados de produtos e pesos de modelos em cache para melhor performance
 
-### Installation
+## 🚀 Como Executar
 
-1. **Clone and install dependencies:**
+### Pré-requisitos
+- Node.js 18+ (compatível com Node.js 20.9.0)
+- npm ou yarn
+- Navegador moderno com suporte a WebGL (para TensorFlow.js)
+
+### Instalação e Execução
+
+1. **Clone o repositório e instale as dependências:**
 ```bash
 git clone <repository-url>
-cd tensorflow-ecommerce
+cd ecommerce-demo
 npm install
 ```
 
-2. **Start the development server:**
+2. **Inicie o servidor de desenvolvimento:**
 ```bash
 npm run dev
 ```
 
-3. **Open your browser:**
-Navigate to `http://localhost:5173`
+3. **Abra seu navegador:**
+Acesse `http://localhost:5173`
 
-## 🔧 How It Works
+## 🔧 Como Funciona
 
-### Machine Learning Architecture
+### Arquitetura de Machine Learning
 
-The application uses a **feedforward neural network** built with TensorFlow.js:
+A aplicação utiliza uma **rede neural feedforward** construída com TensorFlow.js:
 
 ```
-Input Layer (Product Features) → Hidden Layers → Output (Recommendation Score)
+Camada de Entrada (Características do Produto) → Camadas Ocultas → Saída (Score de Recomendação)
 ```
 
-**Input Features:**
-- Category encoding (one-hot)
-- Price normalization
-- Rating scores
-- Feature flags (premium, wireless, etc.)
+**Características de Entrada:**
+- Codificação de categoria (one-hot encoding)
+- Normalização de preço (0-1)
+- Scores de avaliação
+- Ranking de popularidade
 
-**Training Process:**
-- **Online Learning**: Model updates after each user interaction
-- **Positive/Negative Sampling**: Clicked products = positive, non-clicked = negative
-- **Collaborative Filtering**: Similar user preference patterns
+**Processo de Treinamento:**
+- **Aprendizado Online**: Modelo atualiza após cada interação do usuário
+- **Amostragem Positiva/Negativa**: Produtos clicados = positivo, não clicados = negativo
+- **Filtragem Colaborativa**: Padrões de preferência de usuários similares
 
-### User Interaction Flow
+### Fluxo de Interação do Usuário
 
-1. **Initial State**: Products displayed in default order (by rating)
-2. **User Clicks**: Product click triggers ML model update
-3. **Recommendation Generation**: TensorFlow.js processes user preferences
-4. **Dynamic Reordering**: Homepage products reorder based on predictions
-5. **Continuous Learning**: Each interaction improves future recommendations
+1. **Estado Inicial**: Produtos exibidos em ordem padrão (por avaliação)
+2. **Cliques do Usuário**: Clique no produto aciona atualização do modelo ML
+3. **Geração de Recomendações**: TensorFlow.js processa preferências do usuário
+4. **Reordenação Dinâmica**: Produtos da homepage se reordenam baseado nas previsões
+5. **Aprendizado Contínuo**: Cada interação melhora recomendações futuras
 
-## 📁 Project Structure
+### Sistema de Detecção de Toxicidade
+
+- **Modelo Pré-treinado**: Utiliza `@tensorflow-models/toxicity` 
+- **Classificação Multiclasse**: Detecta múltiplas categorias de toxicidade
+- **Moderação Automática**: Comentários tóxicos são bloqueados automaticamente
+- **Inferência em Tempo Real**: Análise instantânea durante o envio de comentários
+
+## 📁 Estrutura do Projeto
 
 ```
 src/
-├── components/           # React components
-│   ├── ProductCard.jsx   # Individual product display
-│   ├── ProductDetail.jsx # Product modal with details
-│   ├── HomePage.jsx      # Main product grid
-│   └── Header.jsx        # Navigation and stats
-├── services/            # Data and utility services
-│   ├── productService.js # Fake Store API integration
-│   └── userTracker.js    # Interaction tracking
-├── ml/                  # Machine learning logic
-│   └── recommendationModel.js # TensorFlow.js model
-├── hooks/               # React hooks
-│   └── useRecommendations.js # ML integration hook
-└── App.jsx             # Main application component
+├── components/              # Componentes React
+│   ├── ProductCard.tsx      # Exibição individual de produto
+│   ├── ProductDetail.tsx    # Modal com detalhes do produto
+│   ├── ProductGrid.tsx      # Grid principal de produtos
+│   ├── CommentSection.tsx   # Sistema de comentários com IA
+│   ├── Layout.tsx           # Layout principal da aplicação
+│   └── Header.tsx           # Navegação e estatísticas
+├── services/                # Serviços de dados e utilitários
+│   ├── api.ts               # Integração com Fake Store API
+│   └── recommendations.ts   # Lógica principal de ML
+├── hooks/                   # React hooks customizados
+│   ├── useGetProducts.ts    # Hook para buscar produtos
+│   ├── useGetProduct.ts     # Hook para produto individual
+│   └── useToxicityDetection.ts # Hook para detecção de toxicidade
+├── store/                   # Gerenciamento de estado
+│   └── useStore.ts          # Store Zustand para estado global
+├── types/                   # Definições TypeScript
+│   └── product.ts           # Interfaces de tipos
+└── App.tsx                  # Componente principal da aplicação
 ```
 
-## 🎯 Key Technologies
+## 🎯 Tecnologias Principais
 
-- **Frontend**: React 18, Vite
-- **Machine Learning**: TensorFlow.js
-- **Data Source**: Fake Store API
-- **Styling**: Vanilla CSS with modern design patterns
-- **State Management**: React Context + Custom Hooks
+- **Frontend**: React 18, TypeScript, Vite
+- **Machine Learning**: TensorFlow.js, @tensorflow-models/toxicity  
+- **Fonte de Dados**: Fake Store API
+- **Estilização**: Tailwind CSS + shadcn/ui
+- **Estado**: Zustand + React Query
+- **Roteamento**: React Router
+- **Cache**: React Query para cache inteligente
 
-## 🧪 Try the Demo
+## 🧪 Teste a Demonstração
 
-### Test the Recommendation System:
+### Testando o Sistema de Recomendações:
 
-1. **Browse Products**: Notice the initial product order
-2. **Click on Products**: Open product details to view information
-3. **Observe Changes**: Return to homepage - products have reordered!
-4. **Continue Clicking**: More interactions = better recommendations
-5. **Check Stats**: Click the "📊 Stats" button to see your interaction data
-6. **Reset Data**: Use "🔄 Reset Data" to start fresh
+1. **Navegue pelos Produtos**: Observe a ordem inicial dos produtos
+2. **Clique nos Produtos**: Abra detalhes do produto para ver informações
+3. **Observe as Mudanças**: Retorne à homepage - produtos se reordenaram!
+4. **Continue Clicando**: Mais interações = melhores recomendações
+5. **Sistema Inteligente**: IA aprende suas preferências em tempo real
 
-### Expected Behavior:
-- Products similar to clicked items move to the top
-- Categories you prefer appear more frequently
-- Recently viewed products get priority boost
-- ML model learns your preferences over time
+### Testando a Detecção de Toxicidade:
 
-## 🎨 Customization
+1. **Acesse um Produto**: Clique em qualquer produto
+2. **Role para Baixo**: Encontre a seção de comentários
+3. **Teste Comentários Limpos**: "Este produto é incrível!" ✅
+4. **Teste Comentários Tóxicos**: "Este produto é terrível!" ❌
+5. **Observe a IA**: Modelo TensorFlow.js analisa automaticamente
 
-### Add New Product Features:
-```javascript
-// In productService.js
-extractFeatures(category, description) {
-  // Add your custom feature detection logic
-  const features = [category];
-  // ... existing code
-  return features;
+### Comportamento Esperado:
+- Produtos similares aos clicados sobem no ranking
+- Categorias preferidas aparecem mais frequentemente  
+- Produtos visualizados recentemente ganham prioridade
+- Modelo ML aprende suas preferências ao longo do tempo
+- Comentários tóxicos são automaticamente bloqueados
+
+## 🎨 Personalização
+
+### Adicionando Novas Características do Produto:
+```typescript
+// Em services/recommendations.ts
+createProductVector(product: Product, allProducts: Product[]): number[] {
+  const vector: number[] = [];
+  
+  // Adicione sua lógica personalizada de extração de características
+  // Exemplo: detectar produtos premium, sem fio, etc.
+  
+  return vector;
 }
 ```
 
-### Modify ML Model:
-```javascript
-// In recommendationModel.js
-createModel(numProducts, numCategories) {
-  // Customize the neural network architecture
+### Modificando o Modelo ML:
+```typescript
+// Em services/recommendations.ts
+private createModel(inputSize: number, outputSize: number) {
+  // Customize a arquitetura da rede neural
   const model = tf.sequential({
     layers: [
-      // Add/modify layers here
+      tf.layers.dense({ inputShape: [inputSize], units: 64, activation: 'relu' }),
+      // Adicione/modifique camadas aqui
+      tf.layers.dense({ units: outputSize, activation: 'softmax' })
     ]
   });
   return model;
 }
 ```
 
-## 🐛 Troubleshooting
+## 🐛 Solução de Problemas
 
-### Common Issues:
+### Problemas Comuns:
 
-1. **Node.js Version Error**: Ensure you're using Node.js 18+ or downgrade Vite
-2. **TensorFlow.js Loading**: Check browser console for WebGL support
-3. **API Timeouts**: Fake Store API occasionally slow - refresh if needed
-4. **LocalStorage Full**: Clear browser data if model can't save
+1. **Erro de Versão do Node.js**: Certifique-se de usar Node.js 18+ 
+2. **Carregamento do TensorFlow.js**: Verifique suporte a WebGL no console do navegador
+3. **Timeouts da API**: Fake Store API às vezes é lenta - atualize se necessário
+4. **LocalStorage Cheio**: Limpe dados do navegador se o modelo não conseguir salvar
+5. **Modelo de Toxicidade Não Carrega**: Aguarde o download inicial (~25MB)
 
-### Development Commands:
+### Comandos de Desenvolvimento:
 ```bash
-npm run dev     # Start development server
-npm run build   # Build for production
-npm run preview # Preview production build
+npm run dev     # Iniciar servidor de desenvolvimento
+npm run build   # Build para produção
+npm run preview # Preview do build de produção
 ```
 
-## 🌟 Future Enhancements
+## 🎓 Conceitos Educativos Demonstrados
 
-- **User Authentication**: Save preferences across devices
-- **Product Filtering**: Category and price filters
-- **Shopping Cart**: Full ecommerce functionality
-- **A/B Testing**: Compare recommendation algorithms
-- **Analytics Dashboard**: Detailed ML model performance metrics
-- **Social Features**: User reviews and ratings
+### Machine Learning:
+- **Redes Neurais Feedforward** com TensorFlow.js
+- **Aprendizado Online** (Online Learning)
+- **Feature Engineering** e normalização de dados
+- **Classificação Multiclasse** para detecção de toxicidade
+- **Persistência de Modelos** no navegador
 
-## 📝 License
+### Desenvolvimento Web:
+- **React Hooks** customizados
+- **State Management** com Zustand
+- **Cache Inteligente** com React Query
+- **Roteamento** com React Router
+- **TypeScript** para tipagem estática
 
-This project is open source and available under the MIT License.
+## 🌟 Melhorias Futuras
 
-## 🤝 Contributing
+- **Autenticação de Usuário**: Salvar preferências entre dispositivos
+- **Filtros de Produto**: Filtros por categoria e preço
+- **Carrinho de Compras**: Funcionalidade completa de e-commerce
+- **Testes A/B**: Comparar algoritmos de recomendação
+- **Dashboard de Analytics**: Métricas detalhadas de performance dos modelos ML
+- **Recursos Sociais**: Avaliações e comentários de usuários
+- **PWA**: Transformar em Progressive Web App
+- **Modelos Avançados**: Implementar transformers ou embeddings
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## 📚 Recursos de Aprendizado
+
+- **TensorFlow.js**: https://js.tensorflow.org/
+- **React Query**: https://tanstack.com/query
+- **Zustand**: https://zustand-demo.pmnd.rs/
+- **Toxicity Model**: https://github.com/tensorflow/tfjs-models/tree/master/toxicity
+
+## 📝 Licença
+
+Este projeto é open source e está disponível sob a Licença MIT.
 
 ---
 
-**Built with ❤️ using React, TensorFlow.js, and modern web technologies.**
-
-# 🧠 Guia Educativo: TensorFlow.js no E-commerce Demo
+**Construído com ❤️ usando React, TensorFlow.js e tecnologias web modernas para fins educativos.**
 
 ## 📋 Visão Geral
 
