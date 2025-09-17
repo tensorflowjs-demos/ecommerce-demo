@@ -4,15 +4,19 @@ import { useStore } from '../store/useStore';
 import { Header } from '../components/Header';
 import { ProductDetail } from '../components/ProductDetail';
 import { Product } from '../types/product';
+import { useProducts } from '../hooks/useProducts';
 
 const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { products, selectedProduct, setSelectedProduct } = useStore();
+  const { selectedProduct, setSelectedProduct } = useStore();
   const [viewingProduct, setViewingProduct] = useState<Product | null>(null);
+  
+  // Use React Query to get products data
+  const { data: products, isLoading } = useProducts();
 
   useEffect(() => {
-    if (id) {
+    if (id && products) {
       const productId = parseInt(id);
       const product = products.find(p => p.id === productId) || selectedProduct;
       
@@ -32,12 +36,17 @@ const ProductDetailPage = () => {
     navigate('/');
   };
 
-  if (!viewingProduct) {
+  if (isLoading || !viewingProduct) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
         <main className="container mx-auto px-4 py-8">
-          <div className="text-center">Loading...</div>
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4 text-muted-foreground">
+              {isLoading ? 'Loading products...' : 'Loading product details...'}
+            </p>
+          </div>
         </main>
       </div>
     );
