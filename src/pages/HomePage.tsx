@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { recommendationEngine } from '../services/recommendations';
-import { Header } from '../components/Header';
 import { RecommendationBanner } from '../components/RecommendationBanner';
 import { ProductGrid } from '../components/ProductGrid';
 import { Product } from '../types/product';
 import { useToast } from '../hooks/use-toast';
-import { useProducts } from '../hooks/useProducts';
+import { useGetProducts } from '../hooks/useGetProducts';
 
 const HomePage = () => {
   const { 
@@ -25,9 +24,8 @@ const HomePage = () => {
     isLoading,
     error,
     isSuccess
-  } = useProducts();
+  } = useGetProducts();
 
-  // Handle success case
   useEffect(() => {
     if (products) {
       setProducts(products);
@@ -88,36 +86,18 @@ const HomePage = () => {
   // Show loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="container mx-auto px-4 py-8">
-          <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-muted-foreground">Loading products...</p>
-          </div>
-        </main>
+      <div className="text-center py-12">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+        <p className="mt-4 text-muted-foreground">Loading products...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
-      <main className="container mx-auto px-4 py-8">
-        <RecommendationBanner />
-        <ProductGrid onProductClick={handleProductClick} />
-      </main>
-      
-      {/* Footer */}
-      <footer className="border-t border-border bg-muted/50 py-8 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground">
-            Powered by TensorFlow.js • ML-Enhanced Shopping Experience
-          </p>
-        </div>
-      </footer>
-    </div>
+    <>
+      <RecommendationBanner />
+      <ProductGrid onProductClick={handleProductClick} />
+    </>
   );
 };
 
